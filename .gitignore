@@ -1,0 +1,7 @@
+# Archivos y directorios propios proyectos Eclipse
+.classpath
+.project
+/.settings/
+
+#Directorio Target Maven
+/target/
