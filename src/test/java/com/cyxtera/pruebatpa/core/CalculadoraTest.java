@@ -90,5 +90,31 @@ class CalculadoraTest {
 		assertTrue(laCalculadora.eliminarUltimoOperando());
 		assertEquals(8, laCalculadora.getListaOperandos().size());
 	}
+	
+	@Test
+	void testMultiplesOperaciones() {
+		laCalculadora.limpiarLista();
+		try {
+			//Suma
+			laCalculadora.adicionarOperando("3");
+			laCalculadora.adicionarOperando("2");
+			assertEquals(5, laCalculadora.ejecutarOperacion(Operaciones.SUMA.getNombreOperacion()));
+			assertEquals(1, laCalculadora.getListaOperandos().size());
+			
+			//Multiplicacion
+			laCalculadora.adicionarOperando("2");
+			assertEquals(10, laCalculadora.ejecutarOperacion(Operaciones.MULTIPLICACION.getNombreOperacion()));
+			
+			//Resta
+			laCalculadora.adicionarOperando("2");
+			assertEquals(8, laCalculadora.ejecutarOperacion(Operaciones.RESTA.getNombreOperacion()));
+			
+			//Potenciacion. No se añaden operandos. Se espera el mismo numero
+			assertEquals(8, laCalculadora.ejecutarOperacion(Operaciones.POTENCIACION.getNombreOperacion()));
+			
+		} catch (OperacionException e) {
+			fail(e.getMessage());
+		}
+	}
 
 }

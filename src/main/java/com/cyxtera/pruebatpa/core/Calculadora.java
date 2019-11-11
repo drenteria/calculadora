@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.cyxtera.pruebatpa.exceptions.OperacionException;
 
 
@@ -22,12 +25,15 @@ public class Calculadora {
 	
 	private IOperacion operacion;
 	
+	private static final Logger logger = LogManager.getLogger();
+	
 	/**
 	 * Constructur de Clase
 	 */
 	public Calculadora() {
 		generarIdSesion();
 		listadoOperandos = new ArrayList<Double>();
+		infoEnLog("Se ha creado la calculadora");
 	}
 	
 	/**
@@ -51,8 +57,10 @@ public class Calculadora {
 	 * @return Listado de los actuales operandos
 	 */
 	public synchronized List<Double> getListaOperandos(){
-		if(this.listadoOperandos == null)
+		if(this.listadoOperandos == null) {
+			errorEnLog("Lista de operandos nula. Se crea nueva lista");
 			return new ArrayList<Double>();
+		}
 		return this.listadoOperandos;
 	}
 	
@@ -83,14 +91,15 @@ public class Calculadora {
 		try {
 			Double auxOp = Double.valueOf(operando);
 			this.getListaOperandos().add(auxOp);
+			infoEnLog("Operando adicionado -> " + operando);
 			return true;
 		}
 		catch (NumberFormatException e) {
-			e.printStackTrace();
+			errorEnLog("No se adiciona operando no numerico", e);
 			return false;
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			errorEnLog("Error al adicionar operando", e);
 			return false;
 		}
 		
@@ -106,10 +115,23 @@ public class Calculadora {
 		Double resultado = 0D;
 		
 		if(getListaOperandos().isEmpty()) {
-			throw new OperacionException("Lista de operandos insuficiente. Se requiere al menos un operando");
+			errorEnLog("Lista de operandos vacía. No se puede ejecutar operación");
+			throw new OperacionException("Lista de operandos vacía. Se requiere al menos un operando");
 		}
 		operacion = OperacionesFactory.getOperacion(nombreOperacion);
-		return operacion.ejecutarOperacion(getListaOperandos());
+		infoEnLog("Operacion solicitada: " + nombreOperacion + " Operandos -> " + getValoresListaOperandos());
+		
+		resultado = operacion.ejecutarOperacion(getListaOperandos());
+		infoEnLog("Resultado Operacion: " + String.valueOf(resultado));
+		
+		/*
+		 * La lista de operandos se limpia y se adiciona el valor del ultimo resultado
+		 * para permitir ejecutar nuevas operaciones
+		 */
+		limpiarLista();
+		adicionarOperando(resultado.toString());
+		
+		return resultado;
 	}
 	
 	/**
@@ -120,8 +142,10 @@ public class Calculadora {
 		Boolean resultado = true;
 		try {
 			int tamanoLista = getListaOperandos().size();
-			if (tamanoLista != 0)
-				getListaOperandos().remove(tamanoLista - 1);
+			if (tamanoLista != 0) {
+				Double removido = getListaOperandos().remove(tamanoLista - 1);
+				infoEnLog("Operando removido -> " + removido.toString());
+			}
 		} catch (Exception e) {
 			resultado = false;
 		}
@@ -136,7 +160,9 @@ public class Calculadora {
 		Boolean resultado = true;
 		try {
 			getListaOperandos().clear();
+			infoEnLog("Se ha limpiado el listado de operandos");
 		} catch (Exception e) {
+			errorEnLog("Error al limpiar listado de operandos", e);
 			resultado = false;
 		}
 		return resultado;
@@ -152,6 +178,42 @@ public class Calculadora {
 		getValoresListaOperandos();
 		sb.append("]");
 		return sb.toString();
+	}
+	
+	/**
+	 * Escribe el mensaje en el log a nivel INFO
+	 * @param mensaje Texto a escribir en log
+	 */
+	private void infoEnLog(String mensaje) {
+		StringBuffer buffer = new StringBuffer("idSesion->");
+		buffer.append(getIdSesion()).append(" - ");
+		buffer.append(mensaje);
+		logger.info(buffer.toString());
+			
+	}
+	
+	/**
+	 * Escribe el mensaje en el log a nivel ERROR
+	 * @param mensaje Mensaje a escribir
+	 * @param ex Excepcion que causa el error, si aplica
+	 */
+	private void errorEnLog(String mensaje, Throwable ex) {
+		StringBuffer buffer = new StringBuffer("idSesion->");
+		buffer.append(getIdSesion()).append(" - ");
+		buffer.append(mensaje);
+		if (ex != null)
+			logger.error(buffer.toString(), ex);
+		else
+			logger.error(buffer.toString());
+			
+	}
+	
+	/**
+	 * Escribe el mensaje en el log a nivel ERROR
+	 * @param mensaje Texto a escribir en log
+	 */
+	private void errorEnLog(String mensaje) {
+		errorEnLog(mensaje, null);
 	}
 
 }
