@@ -18,6 +18,15 @@ class OperacionesFactoryTest {
 			IOperacion resta = OperacionesFactory.getOperacion(Operaciones.RESTA);
 			assertTrue(resta instanceof OpResta);
 			
+			IOperacion multiplicacion = OperacionesFactory.getOperacion(Operaciones.MULTIPLICACION);
+			assertTrue(multiplicacion instanceof OpMultiplicacion);
+			
+			IOperacion division = OperacionesFactory.getOperacion(Operaciones.DIVISION);
+			assertTrue(division instanceof OpDivision);
+			
+			IOperacion potencia = OperacionesFactory.getOperacion(Operaciones.POTENCIACION);
+			assertTrue(potencia instanceof OpPotenciacion);
+			
 		} catch (OperacionException e) {
 			fail(e.getMessage());
 		}

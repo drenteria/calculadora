@@ -116,5 +116,13 @@ class CalculadoraTest {
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test
+	void testToString() {
+		laCalculadora.adicionarOperando("1");
+		laCalculadora.adicionarOperando("2");
+		laCalculadora.adicionarOperando("3");
+		assertNotNull(laCalculadora.toString());
+	}
 
 }

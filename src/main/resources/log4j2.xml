@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
-    <Appenders>
-        <Console name="console" target="SYSTEM_OUT">
-            <PatternLayout
-                pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
-        </Console>
-    </Appenders>
-    <Loggers>
-        <Root level="debug" additivity="false">
-            <AppenderRef ref="console" />
-        </Root>
-    </Loggers>
+<Configuration status="WARN">
+	<Properties>
+		<Property name="LOG_PATTERN">[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</Property>
+	</Properties>
+	<Appenders>
+		<RollingFile name="logFile"
+			fileName="${sys:java.io.tmpdir}/Calculadora.log"
+			filePattern="${sys:java.io.tmpdir}/Calculadora-%d{yyyy-MM-dd}-%i.log">
+			<LevelRangeFilter minLevel="FATAL" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<Policies>
+				<SizeBasedTriggeringPolicy size="128KB" />
+			</Policies>
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="all" additivity="false">
+			<AppenderRef ref="logFile" />
+		</Root>
+	</Loggers>
 </Configuration>
