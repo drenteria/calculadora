@@ -68,7 +68,7 @@ public class Calculadora {
 	 * Obtiene una representacion de la lista de operandos actual
 	 * @return Un string con los valores actuales de la lista de operandos
 	 */
-	public String getValoresListaOperandos() {
+	private String getValoresListaOperandos() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
 		int conteo = 0;
