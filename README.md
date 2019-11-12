@@ -85,7 +85,7 @@ Se obtiene un objeto Json con los atributos de la calculadora actual, de tal man
 	}
 
 *Nota*: 
-- Si el identificacdor de sesion ingresado no existe, la respuesta es de código HTTP 504 (Bad Request).
+- Si el identificacdor de sesion ingresado no existe, la respuesta es de código HTTP 400 (Bad Request).
 
 #### Metodo ejecutar
 
@@ -116,8 +116,8 @@ Se obtiene un objeto Json con los atributos de la calculadora actual, pero en la
 	}
 
 *Nota*: 
-- Si la operacion ingresada no es permitida, la respuesta es de código HTTP 504 (Bad Request).
-- Si el identificacdor de sesion ingresado no existe, la respuesta es de código HTTP 504 (Bad Request).
+- Si la operacion ingresada no es permitida, la respuesta es de código HTTP 400 (Bad Request).
+- Si el identificacdor de sesion ingresado no existe, la respuesta es de código HTTP 400 (Bad Request).
 
 #### Metodo finalizar
 
