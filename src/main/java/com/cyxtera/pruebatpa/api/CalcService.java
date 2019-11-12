@@ -10,7 +10,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.cyxtera.pruebatpa.core.Calculadora;
-import com.cyxtera.pruebatpa.core.Operando;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)

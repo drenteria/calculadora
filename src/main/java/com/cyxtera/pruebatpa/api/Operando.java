@@ -1,4 +1,4 @@
-package com.cyxtera.pruebatpa.core;
+package com.cyxtera.pruebatpa.api;
 
 /**
  * Clase POJO creada para poder admitir un via REST Json un nuevo operando
