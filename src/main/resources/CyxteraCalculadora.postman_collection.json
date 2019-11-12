@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "43887875-d95d-4cae-83d4-2a078664dfa2",
+		"name": "CyxteraCalculadora",
+		"description": "Prueba para API Calculadora\nPrueba Cyxtera Technical Product Architect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "IniciarSesion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/calculadora/api/iniciarSesion",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calculadora",
+						"api",
+						"iniciarSesion"
+					]
+				},
+				"description": "IniciarSesion Calculadora"
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idSesion\": \"5c266784-9503-4d85-8fab-949ba6ec75d6\",\n\t\"valor\":\"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/calculadora/api/adicionar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calculadora",
+						"api",
+						"adicionar"
+					]
+				},
+				"description": "Adicionar Operando Calculadora"
+			},
+			"response": []
+		},
+		{
+			"name": "Ejecutar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idSesion\": \"5c266784-9503-4d85-8fab-949ba6ec75d6\",\n\t\"operacion\":\"division\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/calculadora/api/ejecutar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calculadora",
+						"api",
+						"ejecutar"
+					]
+				},
+				"description": "Ejecutar operacion Calculadora"
+			},
+			"response": []
+		},
+		{
+			"name": "Remover",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/calculadora/api/finalizar/884f2751-c493-4f62-b79c-fbdecd9c598d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calculadora",
+						"api",
+						"finalizar",
+						"884f2751-c493-4f62-b79c-fbdecd9c598d"
+					]
+				},
+				"description": "Remover Calculadora"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
