@@ -9,13 +9,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.cyxtera.pruebatpa.core.Calculadora;
+import com.cyxtera.pruebatpa.core.Operando;
 
 @Path("/api")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class CalcService {
 
-	private Calculadora calculadora;
+	private static Calculadora calculadora;
 
 	public CalcService() {
 		calculadora = new Calculadora();
@@ -30,11 +31,9 @@ public class CalcService {
 	@POST
 	@Path("/adicionar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response adicionarOperando(String operando) {
-
-		calculadora.adicionarOperando(operando);
-		return Response.ok(calculadora.getListaOperandos(), MediaType.APPLICATION_JSON).build();
-
+	public Response adicionarOperando(Operando operando) {
+		calculadora.adicionarOperando(operando.getValor());
+		return Response.ok(calculadora, MediaType.APPLICATION_JSON).build();
 	}
 
 }
