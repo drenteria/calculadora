@@ -1,8 +1,13 @@
 package com.cyxtera.pruebatpa.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.cyxtera.pruebatpa.exceptions.OperacionException;
 
 public class OperacionesFactory {
+	
+	private static final Logger logger = LogManager.getLogger();
 	
 	/**
 	 * Determina si una operacion dada hace parte de las operaciones permitidas en la
@@ -27,9 +32,11 @@ public class OperacionesFactory {
 	 */
 	public static IOperacion getOperacion(String nombreOperacion) throws OperacionException {
 		
+		logger.debug("OperacionesFactory - Operacion solicitada -> " + nombreOperacion);
 		Operaciones op = esOperacionValida(nombreOperacion);
 		
 		if(op == null) {
+			logger.error("OperacionesFactory - Operacion no permitida");
 			throw new OperacionException("Operacion no permitida para la Calculadora");
 		}
 		
