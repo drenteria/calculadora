@@ -1,6 +1,7 @@
 package com.cyxtera.pruebatpa.api;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,6 +51,24 @@ public class CalcManager {
 		}
 		log.error("Calculadora no existe en lista -> " + idSesion);
 		return null;
+	}
+
+	public synchronized Boolean removerCalculadora(String idSesion) {
+		Boolean resultado = Boolean.FALSE;
+		ListIterator<Calculadora> iterador = listado.listIterator();
+		while (iterador.hasNext()) {
+			Calculadora actual = iterador.next();
+			if (actual.getIdSesion().equals(idSesion)) {
+				iterador.remove();
+				resultado = Boolean.TRUE;
+				break;
+			}
+		}
+		if (resultado) {
+			log.info("Se remueve calculadora con id de sesion -> " + idSesion);
+			log.info("Tamaño de la lista -> " + listado.size());
+		}
+		return resultado;
 	}
 
 }
