@@ -7,6 +7,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import com.cyxtera.pruebatpa.core.Calculadora;
 import com.cyxtera.pruebatpa.core.Operando;
@@ -16,24 +17,33 @@ import com.cyxtera.pruebatpa.core.Operando;
 @Consumes(MediaType.APPLICATION_JSON)
 public class CalcService {
 
-	private static Calculadora calculadora;
+	private CalcManager calcManager;
 
 	public CalcService() {
-		calculadora = new Calculadora();
+		calcManager = CalcManager.getInstance();
 	}
 
 	@GET
 	@Path("/iniciarSesion")
 	public Response iniciarSesion() {
-		return Response.ok(calculadora, MediaType.APPLICATION_JSON).build();
+		return Response.ok(calcManager.nuevaCalculadora(), MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST
 	@Path("/adicionar")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response adicionarOperando(Operando operando) {
-		calculadora.adicionarOperando(operando.getValor());
-		return Response.ok(calculadora, MediaType.APPLICATION_JSON).build();
+		
+		Calculadora calc = calcManager.buscarCalculadora(operando.getIdSesion());
+		if (calc != null) {
+			calc.adicionarOperando(operando.getValor());
+			return Response.ok(calc, MediaType.APPLICATION_JSON).build();
+		}
+		else {
+			return Response.status(Status.BAD_REQUEST).entity("Calculadora no encontrada").build();
+		}
+		
+		
 	}
 
 }
