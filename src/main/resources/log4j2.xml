@@ -10,7 +10,7 @@
 			<LevelRangeFilter minLevel="FATAL" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
 			<PatternLayout pattern="${LOG_PATTERN}" />
 			<Policies>
-				<SizeBasedTriggeringPolicy size="128KB" />
+				<SizeBasedTriggeringPolicy size="128MB" />
 			</Policies>
 			<DefaultRolloverStrategy max="10" />
 		</RollingFile>
