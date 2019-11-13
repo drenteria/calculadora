@@ -5,7 +5,7 @@
 	<groupId>com.cyxtera.pruebatpa</groupId>
 	<artifactId>calculadora</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>calculadora Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
@@ -95,4 +95,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<description>Proyecto Prueba Calculadora
+Technical Product Architect Cyxtera</description>
 </project>
