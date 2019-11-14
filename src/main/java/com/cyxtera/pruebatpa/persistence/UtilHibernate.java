@@ -13,7 +13,7 @@ public class UtilHibernate {
 		return sessionFactory;
 	}
 	
-	private static void closeSessionFactory() {
+	public static void closeSessionFactory() {
 		getSessionFactory().close();
 	}
 	

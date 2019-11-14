@@ -2,12 +2,12 @@ package com.cyxtera.pruebatpa.audit;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import com.cyxtera.pruebatpa.persistence.UtilHibernate;
 
@@ -42,7 +42,13 @@ public class AuditoriaManager {
 		ArrayList<EntradaAuditoria> listaPorSesion = new ArrayList<EntradaAuditoria>();
 		
 		Session session = UtilHibernate.getSessionFactory().openSession();
-		listaPorSesion.addAll(session.createQuery("from CalcAuditoria", EntradaAuditoria.class).list());
+		
+		Query<EntradaAuditoria> query = session.createQuery(
+				"FROM EntradaAuditoria WHERE idSesion = :idSesion", 
+				EntradaAuditoria.class);
+		query.setParameter("idSesion", idSesion);
+		
+		listaPorSesion.addAll(query.list());
 		
 		auditLogger.info("Acciones encontradas para el idSesion " + idSesion + ": " + listaPorSesion.size());
 		return listaPorSesion;

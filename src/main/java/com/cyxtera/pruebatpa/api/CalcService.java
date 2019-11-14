@@ -44,6 +44,7 @@ public class CalcService {
 		Calculadora calc = calcManager.buscarCalculadora(operando.getIdSesion());
 		if (calc != null) {
 			calc.adicionarOperando(operando.getValor());
+			auditoria.registrarAuditoriaCalc(operando.getIdSesion(), "adicionar", operando.getValor());
 			return Response.ok(calc, MediaType.APPLICATION_JSON).build();
 		} else {
 			return Response.status(Status.BAD_REQUEST).entity("Calculadora no encontrada").build();
@@ -57,7 +58,8 @@ public class CalcService {
 		Calculadora calc = calcManager.buscarCalculadora(operacion.getIdSesion());
 		if (calc != null) {
 			try {
-				calc.ejecutarOperacion(operacion.getOperacion());
+				Double resultado = calc.ejecutarOperacion(operacion.getOperacion());
+				auditoria.registrarAuditoriaCalc(calc.getIdSesion(), operacion.getOperacion(), resultado.toString());
 			} catch (OperacionException e) {
 				return Response.status(Status.BAD_REQUEST).entity("Operacion no permitida").build();
 			}
@@ -70,8 +72,10 @@ public class CalcService {
 	@DELETE
 	@Path("/finalizar/{id}")
 	public Response eliminarCalculadora(@PathParam("id") String idSesion) {
-		if(calcManager.removerCalculadora(idSesion))
+		if(calcManager.removerCalculadora(idSesion)) {
+			auditoria.registrarAuditoriaCalc(idSesion, "finalizar", "");
 			return Response.ok("OK", MediaType.APPLICATION_JSON).build();
+		}
 		else
 			return Response.ok("No encontrada", MediaType.APPLICATION_JSON).build();
 	}

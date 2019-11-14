@@ -27,7 +27,7 @@ public class OperacionesFactory {
 	/**
 	 * Metodo para obtener una operación matematica para la calculadora
 	 * @param nombreOperacion Nombre de la operacion solicitada
-	 * @return Una instancia de la clase <code>IOperacion</code> correspondiente a la operación pedida
+	 * @return Una instancia de la clase <code>IOperacion</code> correspondiente a la operación pedida.
 	 * @throws OperacionException Si el nombre de la operacion solicitada no concuerda con ninguna de las opciones permitidas
 	 */
 	public static IOperacion getOperacion(String nombreOperacion) throws OperacionException {

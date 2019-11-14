@@ -39,7 +39,7 @@ class OperacionesFactoryTest {
 			assertTrue(suma instanceof OpSuma);
 			
 			IOperacion resta = OperacionesFactory.getOperacion("resta");
-			assertTrue(suma instanceof OpSuma);
+			assertTrue(resta instanceof OpResta);
 		} catch (OperacionException e) {
 			fail(e.getMessage());
 		}
