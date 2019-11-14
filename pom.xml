@@ -14,6 +14,16 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 	</properties>
 	<dependencies>
+
+		<!-- Dependencia para Proyectos Maven WebApp en Eclipse -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JUnit para pruebas unitarias -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -29,17 +39,15 @@
 			<artifactId>junit-platform-surefire-provider</artifactId>
 			<version>1.2.0-M1</version>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
-			<scope>provided</scope>
-		</dependency>
+
+		<!-- Log4j para log de eventos -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.12.1</version>
 		</dependency>
+
+		<!-- Dependencias para exposicion de servicios ReST -->
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -72,6 +80,24 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.29</version>
 		</dependency>
+
+		<!-- Dependencias para Base de Datos -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.4.1.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>calculadora</finalName>
@@ -95,6 +121,5 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	<description>Proyecto Prueba Calculadora
-Technical Product Architect Cyxtera</description>
+	<description>Proyecto Prueba Calculadora Technical Product Architect Cyxtera</description>
 </project>

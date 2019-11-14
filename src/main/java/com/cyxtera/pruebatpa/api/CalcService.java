@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.cyxtera.pruebatpa.audit.AuditoriaManager;
 import com.cyxtera.pruebatpa.core.Calculadora;
 import com.cyxtera.pruebatpa.exceptions.OperacionException;
 
@@ -20,15 +21,20 @@ import com.cyxtera.pruebatpa.exceptions.OperacionException;
 public class CalcService {
 
 	private CalcManager calcManager;
+	
+	private AuditoriaManager auditoria;
 
 	public CalcService() {
 		calcManager = CalcManager.getInstance();
+		auditoria = new AuditoriaManager();
 	}
 
 	@GET
 	@Path("/iniciarSesion")
 	public Response iniciarSesion() {
-		return Response.ok(calcManager.nuevaCalculadora(), MediaType.APPLICATION_JSON).build();
+		Calculadora laCalculadora = calcManager.nuevaCalculadora();
+		auditoria.registrarAuditoriaCalc(laCalculadora.getIdSesion(), "iniciarSesion", "");
+		return Response.ok(laCalculadora, MediaType.APPLICATION_JSON).build();
 	}
 
 	@POST
