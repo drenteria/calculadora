@@ -36,13 +36,13 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"idSesion\": \"5c266784-9503-4d85-8fab-949ba6ec75d6\",\n\t\"valor\":\"2\"\n}",
+					"raw": "{\n    \"idSesion\": \"afa0cf49-859e-4bfa-8fbb-502b052f6c7f\",\n    \"valor\": \"4\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,7 +80,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"idSesion\": \"5c266784-9503-4d85-8fab-949ba6ec75d6\",\n\t\"operacion\":\"division\"\n}",
+					"raw": "{\n\t\"idSesion\": \"afa0cf49-859e-4bfa-8fbb-502b052f6c7f\",\n\t\"operacion\":\"multiplicacion\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -105,9 +105,12 @@
 			"response": []
 		},
 		{
-			"name": "Remover",
+			"name": "Audit",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -126,7 +129,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/calculadora/api/finalizar/884f2751-c493-4f62-b79c-fbdecd9c598d",
+					"raw": "http://localhost:8080/calculadora/audit/54af48da-bebb-4ba1-834b-f2c9ff5abe79",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -134,12 +137,11 @@
 					"port": "8080",
 					"path": [
 						"calculadora",
-						"api",
-						"finalizar",
-						"884f2751-c493-4f62-b79c-fbdecd9c598d"
+						"audit",
+						"54af48da-bebb-4ba1-834b-f2c9ff5abe79"
 					]
 				},
-				"description": "Remover Calculadora"
+				"description": "Auditoria Calculadora"
 			},
 			"response": []
 		}

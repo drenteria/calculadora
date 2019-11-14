@@ -28,9 +28,16 @@ Se crearon pruebas unitarias JUnit para las clases que ejecutan las operaciones 
 ---
 El log de la aplicación se puede encontrar en el directorio temporal del usuario que este ejecutando la aplicación, ya que los logs se encuentran configurados en la variable de entorno de Java `java.io.tmpdir`. El log se llama Calculadora.java y se encuentra configurado para renovarse diariamente. La configuración de este log puede encontrarse en el archivo `src/main/resources/log4j2.xml`
 
+### Auditoria de Sesiones
+---
+Se implementó un sistema que registra la auditoria de los diferentes en una base de datos relacional en memoria (H2) y se expuso un API REST que permite consultar para un id de sesion especifico todas las operaciones que hayan sido realizadas dentro de la sesion.
+
 ## Pruebas a Servicios Rest
 ---
 Los servicios REST que provee la aplicacion pueden ser probados a traves de un cliente REST, como Postman. Si se cuenta con esta aplicación, puede utilizar el archivo `src/main/resources/CyxteraCalculadora.postman_collection.json` para importar en postman una colección con los request de prueba para cada una de las cuatro operaciones.
+
+### API de Calculadora
+Servicios expuestos para la calculadora:
 
 #### Metodo iniciarSesion
 
@@ -138,3 +145,50 @@ Este request no contiene payload. El id de sesion que se desea finalizar va como
 *Response*
 
 Se obtiene una respuesta en texto plano de si se pudo eliminar la sesion `OK` o si la sesion ingresada no existe `No encontrada`
+
+### API de Auditoria
+Servicios expuestos para auditoria de sesiones de calculadora:
+
+#### Metodo consultar
+
+*URL*
+
+<http://servidor:puerto/calculadora/audit/{idSesion}>
+
+*Verbo HTTP*
+
+GET
+
+*Request*
+
+Este request no contiene payload. El id de sesion que se desea consultar va como parte de la URL solicitada:
+
+	http://localhost:8080/calculadora/audit/e0570a43-72e0-4feb-ad2b-bbfbbd043949
+
+*Response*
+
+En la respuesta se encuentran listadas todas las acciones ejecutadas dentro del id de sesion especificado, si se encuentran. Para cada entrada aparecen el identificador de la entrada de auditoría, el id de sesión, la accion ejecutada, el valor de la accion si aplica y la fecha en que la accion fue ejecutada (en formato milisegundos)
+
+	[
+    {
+        "id": 1,
+        "idSesion": "e0570a43-72e0-4feb-ad2b-bbfbbd043949",
+        "operacion": "iniciarSesion",
+        "valor": "",
+        "fechaEntrada": 1573719540501
+    },
+    {
+        "id": 2,
+        "idSesion": "e0570a43-72e0-4feb-ad2b-bbfbbd043949",
+        "operacion": "adicionar",
+        "valor": "4",
+        "fechaEntrada": 1573719551959
+    },
+    {
+        "id": 3,
+        "idSesion": "e0570a43-72e0-4feb-ad2b-bbfbbd043949",
+        "operacion": "multiplicacion",
+        "valor": "4.0",
+        "fechaEntrada": 1573719559729
+    }
+	] 
