@@ -41,7 +41,7 @@ Se implementó un sistema que registra la auditoria de los diferentes en una bas
 
 ## Pruebas a Servicios Rest
 ---
-Los servicios REST que provee la aplicacion pueden ser probados a traves de un cliente REST, como Postman. Si se cuenta con esta aplicación, puede utilizar el archivo `src/main/resources/CyxteraCalculadora.postman_collection.json` para importar en postman una colección con los request de prueba para cada una de las cuatro operaciones.
+Los servicios REST que provee la aplicacion pueden ser probados a traves de un cliente REST, como Postman. Si se cuenta con esta aplicación, puede utilizar el archivo `src/main/resources/CalculadoraRest.postman_collection.json` para importar en postman una colección con los request de prueba para cada una de las cuatro operaciones.
 
 ### API de Calculadora
 Servicios expuestos para la calculadora:
