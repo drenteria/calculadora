@@ -1,4 +1,4 @@
-# Prueba Técnica Technical Product Architect Cyxtera
+# Calculadora REST
 *2019-11-12*
 
 *Daniel Felipe Renteria Martinez*
@@ -9,7 +9,14 @@ La aplicacion web para calculos expone servicios REST que permiten ejecutar oper
 
 Cabe anotar que cuando se ejecuta una operacion, la calculadora automáticamente vacía su lista de operandos anterior y deja únicamente el resultado de la operación solicitada siempre y cuando esta sea valida. Esto permite que la sesion pueda seguir siendo usada y que el resultado de la operacion inmediatamente anterior haga parte de los nuevos operandos.
 
-Esta aplicación esta creada en lenguaje de programacion Java y el ciclo de desarrollo esta en Maven. Las pruebas se realizaron en el contenedor de aplicaciones Apache Tomcat 8.5, pero al ser una aplicación web, puede ser desplegada en cualquier servidor de aplicaciones JEE (JBoss, WildFly, Jetty, etc.)
+Tecnologías asociadas:
+* Java SE 1.8
+* Maven
+* JUnit 5.5.2
+* Log4j 2.12
+* Jersey 2.29 (para mapeo de objetos Java a REST)
+* Hibernate 5.4.1
+* H2 Database 1.4
 
 ## Operaciones implementadas
 ---
